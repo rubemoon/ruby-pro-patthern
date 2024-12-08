@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [ :index, :new, :edit ] do
+  resources :users, only: [ :index, :new, :edit, :create, :update ] do
     resources :notifications do
       collection do
         post :test
