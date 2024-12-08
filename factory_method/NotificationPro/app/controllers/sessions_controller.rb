@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      NotificationFactory.create_notification(:push, user, "New login from #{request.remote_ip}")
+      NotificationFactory.create_notification(:push, user, "Welcome back, #{user.name}!")
       redirect_to root_path, notice: "Logged in successfully."
     else
       flash.now[:alert] = "Invalid email or password."
