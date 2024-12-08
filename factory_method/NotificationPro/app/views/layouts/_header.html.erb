@@ -1,0 +1,55 @@
+<header class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 lg:ps-[260px]">
+  <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
+    <div class="me-5 lg:me-0 lg:hidden">
+      <!-- Logo -->
+      <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
+        <svg class="w-28 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG content -->
+        </svg>
+      </a>
+      <!-- End Logo -->
+    </div>
+
+    <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+      <div class="hidden md:block">
+       
+      </div>
+
+      <div class="flex flex-row items-center justify-end gap-1">
+        <%= render "layouts/notifications" %>
+
+        <button type="button" class="size-[38px] relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-black dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span class="sr-only">Activity</span>
+        </button>
+
+        <!-- Dropdown -->
+        <div data-controller="dropdown" class="relative inline-flex">
+          <button id="hs-dropdown-account" type="button" data-action="click->dropdown#toggle" class="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <% avatar_url = user_avatar_url(current_user.email, 38) %>
+            <% if avatar_exists?(avatar_url) %>
+              <img class="shrink-0 size-[38px] rounded-full" src="<%= avatar_url %>" alt="Avatar">
+            <% else %>
+              <img class="shrink-0 size-[38px] rounded-full" src="https://via.placeholder.com/38" alt="Avatar">
+            <% end %>
+          </button>
+
+          <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-4 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700">
+            <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
+              <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
+              <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><%= current_user.email %></p>
+            </div>
+            <div class="p-1.5 space-y-0.5">
+              <%= form_with url: logout_path, method: :delete, class: "inline" do %>
+                <button type="submit" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                  Logout
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
